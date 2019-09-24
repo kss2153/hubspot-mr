@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>Hubspot-MR</title>
+    </head>
+    <body>
+        <h1>Welcome to Hubspot-MR</h1>
+        {% if label == 'SIGN INTO GOOGLE' %}
+          <a href="/auth/goog/authorize?goog_home=doc_ext.main_app" > {{ label }} </a>
+        {% endif %}
+        {% if show and label != 'SIGN INTO GOOGLE' %}
+          <h3>Create Google Doc From Template</h3>
+          <form method="POST">
+              <select name="template">
+                  {% for temp in templates %}
+                  <option value= "{{ temp.template_id }}" SELECTED>{{ temp.template_name }}: {{temp.associated_object}}</option>"
+                  {% endfor %}
+              </select>
+              <input type="submit" value="GO">
+          </form>
+        {% endif %}
+
+        <h3>Add a template</h3>
+        <form method="POST" action="/docs/add_template">
+            <label for="templateName">Template Name</label>
+            <input name="templateName"><br/>
+            <label for="objectType">Object Type</label>
+            <select name="objectType">
+                <option value= "COMPANY">Company</option>"
+                <option value= "CONTACT">Contact</option>"
+            </select><br/>
+            <label for="fileId">Google Doc File ID</label>
+            <input name="fileId"><br/>
+            <input type="submit" value="ADD">
+        </form>
+        {% if msg_red %}
+          <i><font color="red">{{ msg_red }}</font></i>
+        {% endif %}
+        {% if msg_green %}
+          <i><font color="lightgreen">{{ msg_green }}</font></i>
+        {% endif %}
+    </body>
+</html>
