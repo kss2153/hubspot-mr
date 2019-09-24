@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, session, url_for, render_template
+from flask import Blueprint, request, redirect, session, url_for, render_template, jsonify
 from googleapiclient.discovery import build
 import google.oauth2.credentials as g_cred
 from app.hs_oauth.controller import get_token_info
